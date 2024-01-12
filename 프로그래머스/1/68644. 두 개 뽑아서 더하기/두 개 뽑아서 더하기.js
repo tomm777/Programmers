@@ -10,6 +10,5 @@ function solution(numbers) {
         }
     }
     const set = new Set(answer.sort());
-    const uniqueArr = [...set];
-    return uniqueArr.sort(function(a,b) {return a - b});
+    return [...set].sort((a,b) => a - b);
 }
