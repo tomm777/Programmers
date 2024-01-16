@@ -10,9 +10,8 @@ function solution(k, score) {
         }
         else if(arr.length >= k){
             if(Math.min(...arr) < score[i]){
-                const newArray = arr.slice();
+                const newArray = [...arr]
                 const minNumber = Math.min(...newArray);
-                // let test = arr.filter(val => val !== Math.min(...arr));
                 let indexNum = arr.indexOf(minNumber);
                 newArray.splice(indexNum , 1);
                 arr = [...newArray]
