@@ -17,5 +17,5 @@ function solution(k, m, score) {
         answer *= m;
     }
 
-    return answer === 1 ? 0 : answer;
+    return answer;
 }
