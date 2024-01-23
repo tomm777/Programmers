@@ -1,27 +1,15 @@
-function countDivisorsSieve(n) {
-  const divisorsCount = new Array(n + 1).fill(0);
-
-  for (let i = 1; i <= n; i++) {
-    for (let j = i; j <= n; j += i) {
-      divisorsCount[j]++;
-    }
-  }
-
-  return divisorsCount;
-}
-
 function solution(number, limit, power) {
-  const divisorsCount = countDivisorsSieve(number);
-  let powerCount = 0;
-
-  for (let i = 1; i <= number; i++) {
-    if (divisorsCount[i] > limit) {
-      powerCount += power;
-    } else {
-      powerCount += divisorsCount[i];
+    var answer = 0;
+    for (let i = 1; i <= number; i++)
+    {
+        let count = 0;
+        for (let j = 1; j * j <= i; j++)
+        {
+            if (j * j == i) count++;
+            else if (i % j == 0) count += 2;
+        }
+        if (count > limit) count = power;
+        answer += count;
     }
-  }
-
-  return powerCount;
+    return answer;
 }
-
