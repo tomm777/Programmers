@@ -1,7 +1,6 @@
 function solution(babbling) {
     let count = 0;
     let example = ["aya", "ye", "woo", "ma"];
-    let testArr = [];
     
     for(let i = 0; i < babbling.length; i++){
         let str = babbling[i];
