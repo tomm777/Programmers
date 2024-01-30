@@ -1,38 +1,37 @@
 function solution(dartResult) {
-    var score = 0;
-    var answer = [];
-    var temp = 0;
+    let answerArr = [];
+    let currentScore = 0;
     
-    for(let i=0; i<dartResult.length; i++) {
-        if(dartResult[i] >= 0 && dartResult[i] <= 9 ) {
-            if( dartResult[i] == 1 && dartResult[i+1] == 0 ) {
-                
-                temp = 10;
-                i++;
-            } else { 
-                temp = dartResult[i];
+    for(let i = 0; i < dartResult.length; i++){
+        if(/[0-9]/.test(dartResult[i])){
+            // 현재 문자가 숫자인 경우, currentScore에 값을 누적
+            currentScore = currentScore * 10 + parseInt(dartResult[i]);
+        } else if(/[SDT]/.test(dartResult[i])){
+            // 스코어 계산
+            if (dartResult[i] === 'S') {
+                answerArr.push(currentScore ** 1);
+            } else if (dartResult[i] === 'D') {
+                answerArr.push(currentScore ** 2);
+            } else if (dartResult[i] === 'T') {
+                answerArr.push(currentScore ** 3);
             }
-        } else if(dartResult[i] === "S") { 
-            answer.push(temp);
-            
-        } else if (dartResult[i] === "D") { 
-            answer.push(Math.pow(temp,2));
-            
-        } else if (dartResult[i] === "T") { 
-            answer.push(Math.pow(temp,3));
-            
-        } else if (dartResult[i] === "#") { 
-            answer[answer.length-1] *= -1; 
-            
-        } else if (dartResult[i] === "*") { 
-            answer[answer.length-1] *= 2;
-            answer[answer.length-2] *= 2;
-            
+            currentScore = 0; // 각 다트가 끝날 때마다 currentScore 초기화
+        } else if(/[*#]/.test(dartResult[i])){
+            if(dartResult[i] === '*'){
+                // '*'이 나온 경우
+                if(answerArr.length > 1){
+                    // 이전 다트의 점수를 2배로 만들기
+                    answerArr[answerArr.length - 2] *= 2;
+                }
+                // 현재 다트의 점수를 2배로 만들기
+                answerArr[answerArr.length - 1] *= 2;
+            }
+            if(dartResult[i] === '#'){
+                // '#'이 나온 경우 현재 다트의 점수에 -1 곱하기
+                answerArr[answerArr.length - 1] *= -1;
+            }
         }
     }
-    for(let i=0; i<answer.length; i++) { 
-        score += Number(answer[i]);
-    }
-        
-    return score;
+   
+    return answerArr.reduce((sum, score) => sum + score, 0);;
 }
