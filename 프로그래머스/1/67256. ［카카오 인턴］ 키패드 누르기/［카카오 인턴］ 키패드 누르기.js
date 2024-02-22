@@ -17,12 +17,15 @@ function solution(numbers, hand) {
             if(arr[j].indexOf(numbers[i]) === 0){
                 leftHand = [j] +""+ arr[j].indexOf(numbers[i]);
                 answer.push('L');
+                break;
             }
             else if(arr[j].indexOf(numbers[i]) === 2){
                 rightHand = [j] +""+ arr[j].indexOf(numbers[i]);
                 answer.push('R');
+                break;
             }
             else {
+                console.log(arr[j].indexOf(numbers[i]))
                 if(arr[j].indexOf(numbers[i]) > 0){
                     targetHand = [j] +""+ arr[j].indexOf(numbers[i]);
                 const leftHandDif = Math.abs(Number(targetHand[0])-Number(leftHand[0])) + Math.abs(Number(targetHand[1])-Number(leftHand[1]));
