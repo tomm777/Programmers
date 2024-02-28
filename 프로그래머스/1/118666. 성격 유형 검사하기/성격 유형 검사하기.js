@@ -9,9 +9,7 @@ function solution(survey, choices) {
             types[survey[i][1]] += Math.abs(score2);
         }
     }
-    console.log(types)
-    return (types['R'] < types['T'] ? 'T' : 'R') +
-        (types['C'] < types['F'] ? 'F' : 'C') +
-    (types['J'] < types['M'] ? 'M' : 'J') +
-    (types['A'] < types['N'] ? 'N' : 'A')
+    const {R, T, C, F, J, M, A, N} = types
+    return (R < T ? 'T' : 'R') + (C < F ? 'F' : 'C') +
+    (J < M ? 'M' : 'J') + (A < N ? 'N' : 'A')
 }
