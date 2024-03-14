@@ -7,13 +7,10 @@ function solution(bandage, health, attacks) {
     let [workTime,recoveryPS,addHealth] = bandage;
     // 연속 공격 카운팅 변수
     let count = 0;
-    // 공격 시간 인덱스
-    let index = 0;
     for(let i = 0; i <= lastAttack; i++){
         if(attacks[0][0] === i){
             currentHealth -= attacks[0][1]
             attacks.splice(0,1);
-            console.log(attacks)
             count = 0;
         }
         else {
