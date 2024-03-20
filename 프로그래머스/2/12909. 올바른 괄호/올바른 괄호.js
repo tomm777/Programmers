@@ -1,25 +1,17 @@
 function solution(s){
-    let leftCount = 0;
-    let rightCount = 0;
-    if(s.length % 2 !== 0){
-        return false
-    }
+    let count = 0;
+    // if(s.length % 2 !== 0){
+    //     return false
+    // }
     for(let i = 0; i < s.length; i++){
-        let str = s[i];
         // 첫번째에 (가 있을때 바로 false 처리
         if(s[0] === ')'){
            return false
         }
-        // )가 (보다 앞설시점에 이미 false
-        if(leftCount < rightCount){
+        if(count < 0 ){
             return false
         }
-        if(str === '('){
-            leftCount++
-        }
-        else {
-            rightCount++
-        }
+        count += s[i] === '(' ? 1 : -1
     }
-    return rightCount === leftCount ? true : false;
+    return count === 0 ? true : false;
 }
