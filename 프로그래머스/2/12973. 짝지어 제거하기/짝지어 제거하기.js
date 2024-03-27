@@ -1,14 +1,13 @@
 function solution(s) {
-    const stack = []; // 스택으로 사용할 빈 배열 초기화
-    for (const char of s) { // 문자열 s의 각 문자에 대해 반복
-        if (stack.length === 0 || stack[stack.length - 1] !== char) {
-            // 스택이 비어있거나, 스택의 마지막 요소가 현재 문자와 다르면
-            stack.push(char); // 현재 문자를 스택에 추가
+    let result = []; 
+    for (let i = 0; i < s.length; i++) {
+        // 현재 문자가 결과 배열의 마지막 문자와 같다면
+        if (result[result.length - 1] === s[i]) {
+            // 결과 배열에서 마지막 문자 제거
+            result.pop(); 
         } else {
-            // 스택의 마지막 요소가 현재 문자와 같으면(연속된 문자)
-            stack.pop(); // 스택의 마지막 요소(연속된 문자 중 하나)를 제거
+            result.push(s[i]);
         }
     }
-    // 스택이 비어있다면 모든 연속된 문자가 제거된 것이므로 1을, 그렇지 않다면 0을 반환
-    return stack.length === 0 ? 1 : 0;
+    return result.length === 0 ? 1 : 0;
 }
