@@ -10,9 +10,6 @@ function solution(n, words) {
         if(i % n === 0){
             count++
         }
-        if(words[i].length <= 1){
-            break;
-        }
         // 중복인 단어를 말할 때
         if(arr.includes(words[i])){
             break;
@@ -22,7 +19,6 @@ function solution(n, words) {
             if(arr[arr.length - 1][arr[arr.length - 1].length - 1] !== words[i][0]){
                 break;
 }
-             
         }
         arr.push(words[i]);
         
