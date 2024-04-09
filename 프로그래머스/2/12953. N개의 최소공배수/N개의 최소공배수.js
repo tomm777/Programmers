@@ -11,18 +11,9 @@ function lcm(a, b) {
 }
 
 function solution(arr) {
-    function lcmArray(arr, index) {
-        // 배열의 마지막 요소에 도달했을 때, 해당 요소를 반환합니다.
-        if (index === arr.length - 1) {
-            return arr[index];
-        }
-        // 현재 요소와 나머지 배열 요소의 최소공배수를 재귀적으로 구합니다.
-        return lcm(arr[index], lcmArray(arr, index + 1));
+    let answer = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        answer = lcm(answer, arr[i]);
     }
-    
-    // 배열의 첫 번째 요소부터 시작하여 모든 요소의 최소공배수를 구합니다.
-    return lcmArray(arr, 0);
+    return answer;
 }
-
-// 예시
-console.log(solution([2, 6, 8, 14])); // 168
