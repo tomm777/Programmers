@@ -1,26 +1,30 @@
 function solution(s) {
-    
-    const  obj= {
-        '}' : '{',
-        ']' : '[',
-        ')' : '(',
+    let count = 0;
+    if(s.length % 2 !== 0) return 0
+    const obj = {
+        '[' : ']',
+        '{' : '}',
+        '(' : ')'
     }
-    
-    const isCorrectBracket = (str) => {
-        const stk = []
-        for (const c of str) {
-            if ('{[('.includes(c)) stk.push(c)
-            else if (obj[c]!== stk.pop()) return false
+    for(let i = 0; i < s.length; i++){
+        let str = s.slice(i) + s.slice(0, i);
+        const arr = [];
+        let flag = 1;
+        for(let j = 0; j < str.length; j++){
+            // if (str[j] === "(" || str[j] === "{" || str[j] === "[") arr.push(str[j]);
+            if(str[j] === "(" || str[j] === "{" || str[j] === "[") arr.push(str[j]);
+            else {
+                const temp = arr.pop();
+                if(str[j] === ')'&& temp === '(') continue;
+                else if(str[j] === '}'&& temp === '{') continue;
+                else if(str[j] === ']'&& temp === '[') continue;
+                flag = 0;
+                break;
+            }
         }
-        return stk.length ? false :true
+        if(flag){
+            count++;
+        }
     }
-    
-    const rotate = (str) => str.substring(1) + str[0]
-    
-    let ret = 0
-    for (let i = 0 ; i < s.length ; i++){
-        s = rotate(s)
-        ret += isCorrectBracket(s) ? 1 : 0
-    }
-    return ret
+    return count;
 }
