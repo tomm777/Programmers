@@ -21,11 +21,10 @@ function solution(want, number, discount) {
             if(obj[keys[j]] !== testObject[keys[j]]) break;
             count++
         }
+        // 할인 받을 수 있는 날 카운팅
         if(count === Object.keys(obj).length){
             answer++
         } 
-        
-        
     }
     return answer;
 }
