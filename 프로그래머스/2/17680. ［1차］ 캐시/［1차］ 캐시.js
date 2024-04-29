@@ -1,38 +1,25 @@
 function solution(cacheSize, cities) {
-    if(cacheSize === 0) return cities.length * 5
-    const answer = [];
+    if (cacheSize === 0) return cities.length * 5; // 캐시 크기가 0인 경우, 모든 도시 처리가 cache miss이므로
+
     let count = 0;
-    const cache = new Map(); // Map 객체 사용
-    cities.forEach((city => {
-        const upperCity = city.toUpperCase();
-         if (cache.has(upperCity)) {
-            count += 1; // 캐시 히트
-            cache.delete(upperCity); // 최근 사용된 도시를 맨 뒤로 옮기기 위해 삭제 후 재삽입
-        }
-        else {
-            count += 5;
-            if (cache.size >= cacheSize) {
-                // 가장 오래된(첫 번째) 키 값 가져오기
-                const firstKey = cache.keys().next().value; 
-                // 가장 오래된 항목 삭제
-                cache.delete(firstKey); 
+    const cache = []; // 캐시를 배열로 관리
+    cities.forEach(city => {
+        city = city.toUpperCase(); // 대소문자 구분 없이 처리
+        const index = cache.indexOf(city); // 현재 도시가 캐시에 있는지 확인
+
+        if (index !== -1) {
+            // cache hit
+            count += 1;
+            cache.splice(index, 1); // 캐시에서 해당 도시 제거
+        } else {
+            // cache miss
+            if (cache.length >= cacheSize) {
+                cache.shift(); // 캐시가 가득 차 있으면, 가장 오래된 항목 제거
             }
+            count += 5;
         }
-        cache.set(upperCity, true);
-    }))
-    // cities = cities.map(item => item.toUpperCase())
-    // for(let i =0; i < cities.length; i++){
-    //     if(answer.filter((city) => cities[i] === city).length  > 0){
-    //         count++
-    //     }
-    //     else {
-    //         count += 5
-    //     }
-    //     // 새로운 도시 추가 후 첫번째 배열 삭제
-    //     answer.push(cities[i])
-    //     if(answer.length > cacheSize){
-    //         answer.shift()
-    //     }
-    // }
+        cache.push(city); // 현재 도시를 캐시에 추가
+    });
+
     return count;
 }
