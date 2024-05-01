@@ -1,3 +1,3 @@
 function solution(s) {
-    return  Math.min(...s.split(' ')) +' '+ Math.max(...s.split(' '))
+    return Math.min(...s.split(' '))+' '+Math.max(...s.split(' '))
 }
